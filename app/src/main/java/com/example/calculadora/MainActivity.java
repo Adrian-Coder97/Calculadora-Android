@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void CE(View view) {
         tv1.setText("0");
-        tv2.setText("");
     }
 
     public void C(View view) {
@@ -388,8 +387,45 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void Porcentaje(View view){
+    public void DividirUno(View view) {
+        String cad = tv1.getText().toString();
+        if (cad.isEmpty() || cad.equals("0")) {
+        } else {
+            Float n1 = Float.parseFloat(cad);
+            n1 = 1 / n1;
+            String resDiv = String.valueOf(n1);
+            tv2.setText(resDiv);
+            tv1.setText("0");
 
+        }
+    }
+
+    public void Exponente(View view) {
+        String cad = tv1.getText().toString();
+        if (cad.isEmpty() || cad.equals("0")) {
+        } else {
+            Float n1 = Float.parseFloat(cad);
+            Float cuadrado = n1 * n1;
+            String resCuadrado = String.valueOf(cuadrado);
+            if (resCuadrado.charAt(resCuadrado.length() - 1) == '0' && resCuadrado.charAt(resCuadrado.length() - 2) == '.') {//si el resultado termina en .0 quitamos ese .0 por que es redundante
+                int resAInt = Math.round(cuadrado);
+                String resAString = String.valueOf(resAInt);
+                tv2.setText(resAString);
+                tv1.setText("0");
+            } else {
+                tv2.setText(resCuadrado);
+                tv1.setText("0");
+            }
+        }
+    }
+
+    public void Porciento(View view) {
+        String cad = tv1.getText().toString();
+        if (cad.isEmpty() || cad.equals("0")) {
+            tv1.setText("3.1416");
+        }else{
+            tv1.append("3.1416");
+        }
     }
 }
 
