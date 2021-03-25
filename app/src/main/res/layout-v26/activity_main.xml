@@ -416,6 +416,7 @@
         android:layout_marginRight="5dp"
         android:autoSizeTextType="uniform"
         android:maxLines="1"
+        android:onClick="Igual"
         android:text="@string/igual"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

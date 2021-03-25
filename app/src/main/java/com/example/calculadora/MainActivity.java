@@ -219,15 +219,14 @@ public class MainActivity extends AppCompatActivity {
         if (cadArriba == "") {/*si la caja de texto de arriba no tiene pasar lo que se ingrese en la caja de abajo a ella*/
             tv2.setText(cad + "+");
             tv1.setText("0");
-        } else if (cadArriba.length() >= 1 && cadArriba.charAt(cadArriba.length() - 1) != '+') {/*si la caja de arriba tiene un numero y aparte tiene un simbolo que no sea un + entonces la operacion que se quiere hacer no es suma*/
+        } else if (cadArriba.length() >= 1 && cadArriba.charAt(cadArriba.length() - 1) != '-') {
             char c = cadArriba.charAt(cadArriba.length() - 1);
-            comprobarOperacion(c, cadArriba, cad);/*comprobar la operacion que se quiere hacer y realizarla*/
-            //DESPUES DE REALIZAR LA OPERACION QUE SE QUIERE REALIZAR PONER EL RESULTADO DE ESA OPERACION Y PONER DESPUES DE ESE RESULTADO UN SIMBOLO +:
+            comprobarOperacion(c, cadArriba, cad);
             String cadArriba2 = tv2.getText().toString();
             cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);
             cadArriba2 = cadArriba2 + "+";
             tv2.setText(cadArriba2);
-        } else {
+        }  else {
             char c = cadArriba.charAt(cadArriba.length() - 1);
             comprobarOperacion(c, cadArriba, cad);
         }
@@ -291,6 +290,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void Igual(View view) {
+        String cad = tv1.getText().toString();
+        String cadArriba = tv2.getText().toString();
+        if (cad.isEmpty() || cadArriba.isEmpty()) {
+            System.out.println("OPERACIONES INCOMPLETAS NO HACER IGUAL");
+        } else {
+            char c = cadArriba.charAt(cadArriba.length() - 1);
+            comprobarOperacion(c, cadArriba, cad);
+            String cadArriba2 = tv2.getText().toString();
+            cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);//quitar el ultimo caracter (es un simbolo que no es necesario)
+            tv2.setText(cadArriba2);
+        }
+
+    }
 
 
     public void Punto(View view) {
