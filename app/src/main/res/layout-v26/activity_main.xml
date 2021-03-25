@@ -266,6 +266,7 @@
         android:layout_marginRight="5dp"
         android:autoSizeTextType="uniform"
         android:maxLines="1"
+        android:onClick="Raiz"
         android:text="@string/raiz"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/button20"

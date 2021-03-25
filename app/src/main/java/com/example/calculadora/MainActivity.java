@@ -219,14 +219,22 @@ public class MainActivity extends AppCompatActivity {
         if (cadArriba == "") {/*si la caja de texto de arriba no tiene pasar lo que se ingrese en la caja de abajo a ella*/
             tv2.setText(cad + "+");
             tv1.setText("0");
-        } else if (cadArriba.length() >= 1 && cadArriba.charAt(cadArriba.length() - 1) != '-') {
+        } else if (cadArriba.length() >= 1 && cadArriba.charAt(cadArriba.length() - 1) != '+') {
             char c = cadArriba.charAt(cadArriba.length() - 1);
             comprobarOperacion(c, cadArriba, cad);
-            String cadArriba2 = tv2.getText().toString();
-            cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);
-            cadArriba2 = cadArriba2 + "+";
-            tv2.setText(cadArriba2);
-        }  else {
+
+            if (Character.isDigit(cadArriba.charAt(cadArriba.length() - 1))) {/*este IF se ejecuta si el ultimo caracter en una cadena de cadArriba no es un simbolo*/
+                System.out.println("NO QUITAR EL ULTIMO Y AGREGAR MAS");
+                tv2.setText(cadArriba + "+");
+            } else {
+                System.out.println("QUITAR EL ULTIMO y CAMBIARLO POR MAS");
+                String cadArriba2 = tv2.getText().toString();
+                cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);
+                cadArriba2 = cadArriba2 + "+";
+                tv2.setText(cadArriba2);
+            }
+
+        } else {
             char c = cadArriba.charAt(cadArriba.length() - 1);
             comprobarOperacion(c, cadArriba, cad);
         }
@@ -241,10 +249,16 @@ public class MainActivity extends AppCompatActivity {
         } else if (cadArriba.length() >= 1 && cadArriba.charAt(cadArriba.length() - 1) != '-') {
             char c = cadArriba.charAt(cadArriba.length() - 1);
             comprobarOperacion(c, cadArriba, cad);
-            String cadArriba2 = tv2.getText().toString();
-            cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);
-            cadArriba2 = cadArriba2 + "-";
-            tv2.setText(cadArriba2);
+            if (Character.isDigit(cadArriba.charAt(cadArriba.length() - 1))) {/*este IF se ejecuta si el ultimo caracter en una cadena de cadArriba no es un simbolo*/
+                System.out.println("NO QUITAR EL ULTIMO AGREGAR MENOS");
+                tv2.setText(cadArriba + "-");
+            } else {
+                System.out.println("QUITAR EL ULTIMO AGREGAR MENOS");
+                String cadArriba2 = tv2.getText().toString();
+                cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);
+                cadArriba2 = cadArriba2 + "-";
+                tv2.setText(cadArriba2);
+            }
         } else {
             char c = cadArriba.charAt(cadArriba.length() - 1);
             comprobarOperacion(c, cadArriba, cad);
@@ -260,10 +274,16 @@ public class MainActivity extends AppCompatActivity {
         } else if (cadArriba.length() >= 1 && cadArriba.charAt(cadArriba.length() - 1) != '*') {
             char c = cadArriba.charAt(cadArriba.length() - 1);
             comprobarOperacion(c, cadArriba, cad);
-            String cadArriba2 = tv2.getText().toString();
-            cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);
-            cadArriba2 = cadArriba2 + "*";
-            tv2.setText(cadArriba2);
+            if (Character.isDigit(cadArriba.charAt(cadArriba.length() - 1))) {/*este IF se ejecuta si el ultimo caracter en una cadena de cadArriba no es un simbolo*/
+                System.out.println("NO QUITAR EL ULTIMO AGREGAR POR");
+                tv2.setText(cadArriba + "*");
+            } else {
+                System.out.println("QUITAR EL ULTIMO AGREGAR POR");
+                String cadArriba2 = tv2.getText().toString();
+                cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);
+                cadArriba2 = cadArriba2 + "*";
+                tv2.setText(cadArriba2);
+            }
         } else {
             char c = cadArriba.charAt(cadArriba.length() - 1);
             comprobarOperacion(c, cadArriba, cad);
@@ -280,10 +300,16 @@ public class MainActivity extends AppCompatActivity {
         } else if (cadArriba.length() >= 1 && cadArriba.charAt(cadArriba.length() - 1) != '/') {
             char c = cadArriba.charAt(cadArriba.length() - 1);
             comprobarOperacion(c, cadArriba, cad);
-            String cadArriba2 = tv2.getText().toString();
-            cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);
-            cadArriba2 = cadArriba2 + "/";
-            tv2.setText(cadArriba2);
+            if (Character.isDigit(cadArriba.charAt(cadArriba.length() - 1))) {/*este IF se ejecuta si el ultimo caracter en una cadena de cadArriba no es un simbolo*/
+                System.out.println("NO QUITAR EL ULTIMO AGREGAR ENTRRE");
+                tv2.setText(cadArriba + "/");
+            } else {
+                System.out.println("QUITAR EL ULTIMO AGREGAR ENTRE");
+                String cadArriba2 = tv2.getText().toString();
+                cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);
+                cadArriba2 = cadArriba2 + "/";
+                tv2.setText(cadArriba2);
+            }
         } else {
             char c = cadArriba.charAt(cadArriba.length() - 1);
             comprobarOperacion(c, cadArriba, cad);
@@ -302,9 +328,7 @@ public class MainActivity extends AppCompatActivity {
             cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);//quitar el ultimo caracter (es un simbolo que no es necesario)
             tv2.setText(cadArriba2);
         }
-
     }
-
 
     public void Punto(View view) {
         String cad = tv1.getText().toString();
@@ -333,7 +357,6 @@ public class MainActivity extends AppCompatActivity {
     public void Borrar(View view) {
         String cad = tv1.getText().toString();
         if (cad.isEmpty() || cad.equals("0")) {
-
         } else if (cad.length() == 1) {
             tv1.setText("0");
         } else {
@@ -343,4 +366,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /*-----------------------------------------------------ESPECIALES----------------------------------------------------------------*/
+
+    public void Raiz(View view) {
+        String cad = tv1.getText().toString();
+        if (cad.isEmpty() || cad.equals("0")) {
+        } else {
+            double n1 = Double.parseDouble(cad);
+            double raiz = Math.sqrt(n1);
+            float raizAFloat = (float) raiz;
+            String raizRes = String.valueOf(raiz);
+            if (raizRes.charAt(raizRes.length() - 1) == '0' && raizRes.charAt(raizRes.length() - 2) == '.') {//si el resultado termina en .0 quitamos ese .0 por que es redundante
+                int resAInt = Math.round(raizAFloat);
+                String resAString = String.valueOf(resAInt);
+                tv2.setText(resAString);
+                tv1.setText("0");
+            } else {
+                tv2.setText(raizRes);
+            }
+        }
+    }
 }
+
