@@ -122,19 +122,30 @@ public class MainActivity extends AppCompatActivity {
         tv2.setText("");
     }
 
+
     public void comprobarOperacion(char c, String cadArriba, String cad) {
-        cadArriba = cadArriba.substring(0, cadArriba.length() - 1);
+        cadArriba = cadArriba.substring(0, cadArriba.length() - 1);//quitarle el simbolo ultimo con el que viene la cadArriba
         if (c == '+') {
             System.out.println("SUMAR: " + cadArriba + c + cad);
             Sumar(cadArriba, cad);
         } else if (c == '-') {
             System.out.println("RESTAR: " + cadArriba + c + cad);
             Restar(cadArriba, cad);
+        } else if (c == '*') {
+            System.out.println("MULTIPLICAR: " + cadArriba + c + cad);
+            Multiplicar(cadArriba, cad);
+        } else if (c == '/') {
+            System.out.println("DIVIDIR: " + cadArriba + c + cad);
+            Dividir(cadArriba, cad);
         }
     }
 
+
+
+    /*----------------------------METODOS DE OPERACIONES-----------------------------------------------------------*/
+
     public void Sumar(String cadArriba, String cad) {
-        float n1 = Float.parseFloat(cadArriba);
+        float n1 = Float.parseFloat(cadArriba);/*REALIZAR LA OPERACION*/
         float n2 = Float.parseFloat(cad);
         float res = n1 + n2;
         String resCad = String.valueOf(res);
@@ -144,14 +155,14 @@ public class MainActivity extends AppCompatActivity {
             tv2.setText(resAInt + "+");
             tv1.setText("0");
         } else {
-            tv2.setText(res + "+");
+            tv2.setText(res + "+");/*MOSTRAR EL RESULTADO*/
             tv1.setText("0");
         }
     }
 
 
     public void Restar(String cadArriba, String cad) {
-        float n1 = Float.parseFloat(cadArriba);
+        float n1 = Float.parseFloat(cadArriba);/*REALIZAR LA OPERACION*/
         float n2 = Float.parseFloat(cad);
         float res = n1 - n2;
         String resCad = String.valueOf(res);
@@ -161,27 +172,64 @@ public class MainActivity extends AppCompatActivity {
             tv2.setText(resAInt + "-");
             tv1.setText("0");
         } else {
-            tv2.setText(resCad + "-");
+            tv2.setText(resCad + "-");/*MOSTRAR EL RESULTADO*/
             tv1.setText("0");
         }
     }
 
+    public void Multiplicar(String cadArriba, String cad) {
+        float n1 = Float.parseFloat(cadArriba);/*REALIZAR LA OPERACION*/
+        float n2 = Float.parseFloat(cad);
+        float res = n1 * n2;
+        String resCad = String.valueOf(res);
+
+        if (resCad.charAt(resCad.length() - 1) == '0' && resCad.charAt(resCad.length() - 2) == '.') {//si el resultado termina en .0 quitamos ese .0 por que es redundante
+            int resAInt = Math.round(res);
+            tv2.setText(resAInt + "*");
+            tv1.setText("0");
+        } else {
+            tv2.setText(resCad + "*");/*MOSTRAR EL RESULTADO*/
+            tv1.setText("0");
+        }
+    }
+
+    public void Dividir(String cadArriba, String cad) {
+        float n1 = Float.parseFloat(cadArriba);/*REALIZAR LA OPERACION*/
+        float n2 = Float.parseFloat(cad);
+        float res = n1 / n2;
+        String resCad = String.valueOf(res);
+
+        if (resCad.charAt(resCad.length() - 1) == '0' && resCad.charAt(resCad.length() - 2) == '.') {//si el resultado termina en .0 quitamos ese .0 por que es redundante
+            int resAInt = Math.round(res);
+            tv2.setText(resAInt + "/");
+            tv1.setText("0");
+        } else {
+            tv2.setText(resCad + "/");/*MOSTRAR EL RESULTADO*/
+            tv1.setText("0");
+        }
+    }
+
+
+
+    /*----------------------------METODOS DE OPERACIONES-----------------------------------------------------------*/
+
     public void Mas(View view) {
         String cad = tv1.getText().toString();
         String cadArriba = tv2.getText().toString();
-        if (cadArriba == "") {
+        if (cadArriba == "") {/*si la caja de texto de arriba no tiene pasar lo que se ingrese en la caja de abajo a ella*/
             tv2.setText(cad + "+");
             tv1.setText("0");
-        } else if (cadArriba.length() >= 1 && cadArriba.charAt(cadArriba.length()-1)!='+') {
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        } else if (cadArriba.length() >= 1 && cadArriba.charAt(cadArriba.length() - 1) != '+') {/*si la caja de arriba tiene un numero y aparte tiene un simbolo que no sea un + entonces la operacion que se quiere hacer no es suma*/
             char c = cadArriba.charAt(cadArriba.length() - 1);
-            comprobarOperacion(c, cadArriba, cad);
+            comprobarOperacion(c, cadArriba, cad);/*comprobar la operacion que se quiere hacer y realizarla*/
+            //DESPUES DE REALIZAR LA OPERACION QUE SE QUIERE REALIZAR PONER EL RESULTADO DE ESA OPERACION Y PONER DESPUES DE ESE RESULTADO UN SIMBOLO +:
             String cadArriba2 = tv2.getText().toString();
-            cadArriba2=cadArriba2.substring(0,cadArriba2.length()-1);
-            cadArriba2=cadArriba2+"+";
+            cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);
+            cadArriba2 = cadArriba2 + "+";
             tv2.setText(cadArriba2);
         } else {
-
+            char c = cadArriba.charAt(cadArriba.length() - 1);
+            comprobarOperacion(c, cadArriba, cad);
         }
     }
 
@@ -191,6 +239,13 @@ public class MainActivity extends AppCompatActivity {
         if (cadArriba == "") {
             tv2.setText(cad + "-");
             tv1.setText("0");
+        } else if (cadArriba.length() >= 1 && cadArriba.charAt(cadArriba.length() - 1) != '-') {
+            char c = cadArriba.charAt(cadArriba.length() - 1);
+            comprobarOperacion(c, cadArriba, cad);
+            String cadArriba2 = tv2.getText().toString();
+            cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);
+            cadArriba2 = cadArriba2 + "-";
+            tv2.setText(cadArriba2);
         } else {
             char c = cadArriba.charAt(cadArriba.length() - 1);
             comprobarOperacion(c, cadArriba, cad);
@@ -198,62 +253,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Por(View view) {
-        //FALTA CORREGIR-----------------------------------------------------------------------------------------------------------------
         String cad = tv1.getText().toString();
         String cadArriba = tv2.getText().toString();
-
         if (cadArriba == "") {
             tv2.setText(cad + "*");
             tv1.setText("0");
+        } else if (cadArriba.length() >= 1 && cadArriba.charAt(cadArriba.length() - 1) != '*') {
+            char c = cadArriba.charAt(cadArriba.length() - 1);
+            comprobarOperacion(c, cadArriba, cad);
+            String cadArriba2 = tv2.getText().toString();
+            cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);
+            cadArriba2 = cadArriba2 + "*";
+            tv2.setText(cadArriba2);
         } else {
-
-            System.out.println();
-            String numeroArribaSinSimbolo = cadArriba.substring(0, cadArriba.length() - 1); /*quitar el simbolo de mas que se agrega al final*/
-            float n1 = Float.parseFloat(numeroArribaSinSimbolo);
-            float n2 = Float.parseFloat(cad);
-            float res = n1 * n2;
-            String resCad = String.valueOf(res);
-
-            if (resCad.charAt(resCad.length() - 1) == '0' && resCad.charAt(resCad.length() - 2) == '.') {/*si el resultado termina en .0 quitamos ese .0 por que es redundante*/
-                int resAInt = Math.round(res);
-                tv2.setText(resAInt + "*");
-                tv1.setText("0");
-            } else {
-                tv2.setText(res + "*");
-                tv1.setText("0");
-            }
-
+            char c = cadArriba.charAt(cadArriba.length() - 1);
+            comprobarOperacion(c, cadArriba, cad);
         }
+
     }
 
     public void Entre(View view) {
-        //FALTA CORREGIR-----------------------------------------------------------------------------------------------------------------
         String cad = tv1.getText().toString();
         String cadArriba = tv2.getText().toString();
-
         if (cadArriba == "") {
             tv2.setText(cad + "/");
             tv1.setText("0");
+        } else if (cadArriba.length() >= 1 && cadArriba.charAt(cadArriba.length() - 1) != '/') {
+            char c = cadArriba.charAt(cadArriba.length() - 1);
+            comprobarOperacion(c, cadArriba, cad);
+            String cadArriba2 = tv2.getText().toString();
+            cadArriba2 = cadArriba2.substring(0, cadArriba2.length() - 1);
+            cadArriba2 = cadArriba2 + "/";
+            tv2.setText(cadArriba2);
         } else {
-
-            System.out.println();
-            String numeroArribaSinSimbolo = cadArriba.substring(0, cadArriba.length() - 1); /*quitar el simbolo de mas que se agrega al final*/
-            float n1 = Float.parseFloat(numeroArribaSinSimbolo);
-            float n2 = Float.parseFloat(cad);
-            float res = n1 / n2;
-            String resCad = String.valueOf(res);
-
-            if (resCad.charAt(resCad.length() - 1) == '0' && resCad.charAt(resCad.length() - 2) == '.') {/*si el resultado termina en .0 quitamos ese .0 por que es redundante*/
-                int resAInt = Math.round(res);
-                tv2.setText(resAInt + "/");
-                tv1.setText("0");
-            } else {
-                tv2.setText(res + "/");
-                tv1.setText("0");
-            }
-
+            char c = cadArriba.charAt(cadArriba.length() - 1);
+            comprobarOperacion(c, cadArriba, cad);
         }
     }
+
+
 
     public void Punto(View view) {
         String cad = tv1.getText().toString();
