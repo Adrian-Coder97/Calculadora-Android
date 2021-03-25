@@ -383,8 +383,13 @@ public class MainActivity extends AppCompatActivity {
                 tv1.setText("0");
             } else {
                 tv2.setText(raizRes);
+                tv1.setText("0");
             }
         }
+    }
+
+    public void Porcentaje(View view){
+
     }
 }
 
